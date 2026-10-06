@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catálogo de maillots · Vika Sports</title>
+<meta name="description" content="Catálogo de maillots de gimnasia rítmica de Vika Sports. Diseños originales confeccionados a tu medida, con o sin manga y falda.">
+<meta property="og:title" content="Catálogo de maillots · Vika Sports">
+<meta property="og:description" content="Diseños originales de maillots de gimnasia rítmica, confeccionados a tu medida.">
+<meta property="og:image" content="logo.png">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500&display=swap">
+<style>
+/* Colores de Vika Sports */
+:root {
+  --magenta: #C0157E;
+  --magenta-oscuro: #8E0E5C;
+  --turquesa: #00B5BE;
+  --tinta: #2B2230;
+  --gris: #776C7D;
+  --fondo: #FBF8F6;
+  --blanco: #FFFFFF;
+  --linea: #EDE5E9;
+  --sombra: 0 10px 30px rgba(60, 20, 50, .08);
+  --radio: 20px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--fondo); color: var(--tinta);
+  font: 15px/1.55 "Montserrat", "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--turquesa); outline-offset: 2px; }
+.envoltura { max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- barra superior ---------- */
+.barra {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(251, 248, 246, .9); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linea);
+}
+.barra .envoltura { display: flex; align-items: center; gap: 12px; height: 64px; }
+.barra .logo img { height: 34px; width: auto; }
+.barra .espacio { flex: 1; }
+.boton-redondo {
+  display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px;
+  border-radius: 999px; border: 1px solid var(--linea); background: var(--blanco);
+  font-weight: 600; font-size: 13px; text-decoration: none; white-space: nowrap;
+}
+.boton-redondo svg { width: 18px; height: 18px; flex: none; }
+.boton-redondo.activo { border-color: var(--magenta); color: var(--magenta); }
+.boton-redondo .cuenta {
+  min-width: 20px; height: 20px; padding: 0 6px; border-radius: 999px; background: var(--magenta);
+  color: #fff; font-size: 11px; display: grid; place-items: center;
+}
+.boton-redondo.whatsapp { background: #25D366; border-color: #25D366; color: #fff; }
+
+/* ---------- portada ---------- */
+.portada { padding: 48px 0 28px; text-align: center; }
+.portada .etiqueta {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--magenta); margin-bottom: 14px;
+}
+.portada h1 {
+  font-size: clamp(32px, 6vw, 58px); line-height: 1.05; font-weight: 800; letter-spacing: -.02em;
+  margin: 0 auto 16px; max-width: 16ch; text-wrap: balance;
+}
+.portada h1 em { font-family: "Playfair Display", Georgia, serif; font-weight: 500; color: var(--magenta); }
+.portada p { margin: 0 auto; max-width: 54ch; color: var(--gris); font-size: 16px; text-wrap: pretty; }
+.ventajas { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin: 22px 0 0; padding: 0; list-style: none; }
+.ventajas li { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+.ventajas li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--turquesa); }
+
+/* ---------- filtros ---------- */
+.busqueda { padding-top: 4px; }
+.filtros {
+  position: sticky; top: 64px; z-index: 20; background: rgba(251, 248, 246, .94); backdrop-filter: blur(10px);
+  padding: 12px 0 8px; border-bottom: 1px solid transparent;
+}
+.filtros.pegado { border-bottom-color: var(--linea); box-shadow: 0 8px 20px rgba(60, 20, 50, .04); }
+.buscador {
+  display: flex; align-items: center; gap: 10px; height: 46px; padding: 0 16px; margin-bottom: 12px;
+  border-radius: 999px; background: var(--blanco); border: 1px solid var(--linea);
+}
+.buscador svg { width: 18px; height: 18px; color: var(--gris); flex: none; }
+.buscador input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: inherit; font-size: 15px; }
+/* En el móvil la fila se desliza con el dedo; el degradado de la derecha avisa de que hay más. */
+.fila {
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 16px; margin: 0 -16px;
+  -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, #000 85%, transparent);
+  scroll-snap-type: x proximity;
+}
+.fila::-webkit-scrollbar { display: none; }
+.fila > * { scroll-snap-align: start; }
+.fila.al-final { -webkit-mask-image: none; mask-image: none; }
+/* En pantallas grandes todo a la vista, en varias líneas si hace falta. */
+@media (min-width: 700px) {
+  .fila { flex-wrap: wrap; overflow: visible; margin: 0; padding: 2px 0; -webkit-mask-image: none; mask-image: none; }
+}
+.chip {
+  flex: none; height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--linea);
+  background: var(--blanco); font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.chip small { font-weight: 500; color: var(--gris); font-size: 11px; }
+.chip:hover { border-color: var(--magenta); }
+.chip[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: #fff; }
+.chip[aria-pressed="true"] small { color: rgba(255, 255, 255, .7); }
+.colores { align-items: center; }
+.colores::before { content: "Color"; flex: none; font-size: 12px; font-weight: 700; color: var(--gris); margin-right: 4px; }
+.muestra {
+  flex: none; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--blanco);
+  box-shadow: 0 0 0 1px var(--linea); padding: 0; position: relative;
+}
+.muestra[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--tinta); }
+.muestra[aria-pressed="true"]::after {
+  content: "✓"; position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 13px; font-weight: 800; color: #fff; text-shadow: 0 0 3px rgba(0, 0, 0, .6);
+}
+.multi { background: conic-gradient(#E0218A, #F28C28, #F7D417, #2EAF5B, #00B5BE, #1F4FBF, #7B3FB5, #E0218A); }
+.resumen { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; font-size: 13px; color: var(--gris); }
+.resumen button { border: 0; background: none; color: var(--magenta); font-weight: 700; font-size: 13px; padding: 4px 0; }
+
+/* ---------- rejilla ---------- */
+.rejilla {
+  display: grid; gap: 14px; padding: 18px 0 60px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 640px) { .rejilla { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; } }
+@media (min-width: 980px) { .rejilla { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; } }
+.tarjeta {
+  position: relative; background: var(--blanco); border-radius: var(--radio); overflow: hidden;
+  border: 1px solid var(--linea); transition: transform .2s ease, box-shadow .2s ease;
+  animation: aparecer .35s ease both;
+}
+@keyframes aparecer { from { opacity: 0; transform: translateY(8px); } }
+.tarjeta:hover { transform: translateY(-3px); box-shadow: var(--sombra); }
+.tarjeta .abrir { display: block; width: 100%; border: 0; padding: 0; background: none; text-align: left; }
+.foto { position: relative; aspect-ratio: 7 / 10; background: radial-gradient(circle at 50% 40%, #fff 0%, var(--tono) 75%); }
+.foto img { position: absolute; inset: 7% 9%; width: 82%; height: 86%; object-fit: contain; transition: opacity .35s ease; }
+/* Mientras carga la foto: brillo suave, y la foto aparece con un fundido. */
+.foto::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%) -150% 0 / 200% 100% no-repeat;
+  animation: brillo 1.4s ease-in-out infinite;
+}
+.foto.lista::before { display: none; }
+@keyframes brillo { to { background-position: 250% 0; } }
+.foto .delante { opacity: 0; }
+.foto.lista .delante { opacity: 1; }
+.foto .dorso { opacity: 0; }
+@media (hover: hover) { .tarjeta:hover .foto .dorso[src] { opacity: 1; } .tarjeta:hover .foto.lista .delante { opacity: 0; } }
+.foto .lado {
+  position: absolute; left: 10px; bottom: 10px; font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gris); background: rgba(255, 255, 255, .8); padding: 3px 8px; border-radius: 999px;
+}
+.info { padding: 12px 14px 14px; }
+.info h3 { margin: 0; font-size: 15px; font-weight: 700; line-height: 1.25; }
+.info .ref { margin: 2px 0 8px; font-size: 11px; letter-spacing: .06em; color: var(--gris); }
+.puntos { display: flex; gap: 4px; }
+.puntos span { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+.corazon {
+  position: absolute; top: 10px; right: 10px; z-index: 2; width: 38px; height: 38px; border-radius: 50%;
+  border: 0; background: rgba(255, 255, 255, .92); display: grid; place-items: center; box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+.corazon svg { width: 18px; height: 18px; fill: none; stroke: var(--tinta); stroke-width: 2; transition: transform .2s; }
+.corazon[aria-pressed="true"] svg { fill: var(--magenta); stroke: var(--magenta); }
+.corazon:active svg { transform: scale(1.25); }
+.vacio { grid-column: 1 / -1; text-align: center; padding: 60px 16px; color: var(--gris); }
+.vacio strong { display: block; color: var(--tinta); font-size: 18px; margin-bottom: 6px; }
+
+/* ---------- ficha del modelo ---------- */
+dialog {
+  border: 0; padding: 0; width: min(1000px, 100vw - 32px); max-height: calc(100dvh - 32px);
+  border-radius: 26px; background: var(--blanco); color: var(--tinta); overflow: hidden;
+  box-shadow: 0 30px 80px rgba(30, 10, 25, .3);
+}
+dialog::backdrop { background: rgba(30, 15, 28, .55); backdrop-filter: blur(4px); }
+dialog[open] { animation: entrar .25s ease; }
+@keyframes entrar { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+.ficha { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); max-height: calc(100dvh - 32px); }
+.ficha .escenario { position: relative; background: radial-gradient(circle at 50% 40%, #fff 0%, var(--tono, #f3eef3) 80%); min-height: 420px; }
+.ficha .escenario img { position: absolute; inset: 6% 8% 14%; width: 84%; height: 80%; object-fit: contain; transition: opacity .3s; }
+.lados { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255, 255, 255, .9); box-shadow: 0 4px 14px rgba(0, 0, 0, .08); }
+.lados button { border: 0; border-radius: 999px; padding: 8px 16px; background: none; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.lados button[aria-pressed="true"] { background: var(--tinta); color: #fff; }
+.flecha {
+  position: absolute; top: 50%; transform: translateY(-50%); width: 42px; height: 42px; border-radius: 50%;
+  border: 0; background: rgba(255, 255, 255, .92); display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0, 0, 0, .1);
+}
+.flecha svg { width: 18px; height: 18px; }
+.flecha.antes { left: 14px; } .flecha.despues { right: 14px; }
+.ficha .texto { padding: 34px 32px 28px; overflow-y: auto; display: flex; flex-direction: column; }
+.cerrar {
+  position: absolute; top: 14px; right: 14px; z-index: 3; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: var(--fondo); display: grid; place-items: center;
+}
+.cerrar svg { width: 18px; height: 18px; }
+.ficha .tema { font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--magenta); }
+.ficha h2 { margin: 6px 0 2px; font-size: clamp(26px, 4vw, 36px); line-height: 1.1; font-weight: 800; letter-spacing: -.01em; }
+.ficha .codigo { font-size: 13px; color: var(--gris); letter-spacing: .06em; }
+.ficha .paleta { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 4px; }
+.ficha .paleta span { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 10px 5px 6px; border-radius: 999px; background: var(--fondo); }
+.ficha .paleta i { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .12); }
+.ficha .colores-texto { margin: 6px 0 0; font-size: 13px; color: var(--gris); }
+.incluye { list-style: none; padding: 0; margin: 20px 0 24px; display: grid; gap: 10px; }
+.incluye li { display: flex; gap: 10px; font-size: 14px; }
+.incluye svg { width: 20px; height: 20px; flex: none; color: var(--turquesa); }
+.acciones { margin-top: auto; display: grid; gap: 10px; }
+.boton {
+  display: flex; align-items: center; justify-content: center; gap: 10px; height: 54px; border-radius: 16px;
+  font-weight: 700; font-size: 15px; text-decoration: none; border: 0;
+}
+.boton svg { width: 20px; height: 20px; }
+.boton.principal { background: var(--magenta); color: #fff; box-shadow: 0 10px 24px rgba(192, 21, 126, .3); }
+.boton.principal:hover { background: var(--magenta-oscuro); }
+.boton.secundario { background: #fff; border: 1px solid var(--linea); }
+.acciones .pequenas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.aviso { font-size: 12px; color: var(--gris); text-align: center; margin: 6px 0 0; }
+
+@media (max-width: 760px) {
+  dialog { width: 100vw; max-width: 100vw; max-height: 100dvh; height: 100dvh; border-radius: 0; margin: 0; }
+  .ficha { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; max-height: 100dvh; height: 100dvh; overflow-y: auto; }
+  .ficha .escenario { min-height: 0; aspect-ratio: 1 / 1.05; }
+  .ficha .texto { padding: 22px 16px calc(20px + env(safe-area-inset-bottom)); overflow: visible; }
+  .barra .texto-boton { display: none; }
+  .barra .boton-redondo { padding: 0 11px; }
+}
+
+/* ---------- pie ---------- */
+footer { border-top: 1px solid var(--linea); padding: 36px 0 48px; text-align: center; color: var(--gris); font-size: 13px; }
+footer img { height: 30px; margin: 0 auto 12px; opacity: .9; }
+footer a { color: var(--magenta); font-weight: 600; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a class="logo" href="#" aria-label="Vika Sports, inicio del catálogo"><img src="logo.png" alt="Vika Sports, gimnasia rítmica"></a>
+    <span class="espacio"></span>
+    <button class="boton-redondo" id="ver-favoritos" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2 0 3.5 1.1 5.4 3.2C13.9 6.1 15.4 5 17.4 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+      <span class="texto-boton">Favoritos</span><span class="cuenta" id="cuenta-favoritos">0</span>
+    </button>
+    <a class="boton-redondo whatsapp" id="whatsapp-barra" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.5.8.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4zM12 21.8a9.9 9.9 0 0 1-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4a9.9 9.9 0 1 1 8.3 4.6zm8.4-18.3A11.8 11.8 0 0 0 .2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7a11.9 11.9 0 0 0 5.7 1.4C18.6 23.7 24 18.4 24 11.8c0-3.2-1.2-6.2-3.6-8.3z"/></svg>
+      <span class="texto-boton">WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<section class="portada envoltura">
+  <span class="etiqueta">Colección Vika Sports · 2026</span>
+  <h1>Maillots que <em>brillan</em> en el tapiz</h1>
+  <p>Diseños originales de gimnasia rítmica, confeccionados uno a uno para cada gimnasta. Elige tu favorito y lo hacemos a tu medida.</p>
+  <ul class="ventajas">
+    <li>En tu talla o a medida</li>
+    <li>Con o sin manga y falda</li>
+    <li>Colores personalizables</li>
+  </ul>
+</section>
+
+<section class="envoltura busqueda" id="busqueda">
+  <label class="buscador">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="buscar" type="search" placeholder="Busca por nombre, código o color" aria-label="Buscar maillot" autocomplete="off">
+  </label>
+  <div class="fila colores" id="colores" role="group" aria-label="Filtrar por color"></div>
+</section>
+
+<div class="filtros" id="filtros">
+  <div class="envoltura">
+    <div class="fila" id="temas" role="group" aria-label="Temas"></div>
+    <div class="resumen">
+      <span id="contador" aria-live="polite"></span>
+      <button id="limpiar" hidden>Quitar filtros</button>
+    </div>
+  </div>
+</div>
+
+<main class="envoltura">
+  <div class="rejilla" id="rejilla"></div>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <img src="logo.png" alt="Vika Sports">
+    <p>Maillots de gimnasia rítmica hechos a mano · Envíos a toda España</p>
+    <p><a id="whatsapp-pie" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> · <a id="formulario-pie">Haz tu pedido</a></p>
+  </div>
+</footer>
+
+<dialog id="ficha" aria-labelledby="ficha-nombre">
+  <div class="ficha">
+    <div class="escenario" id="escenario">
+      <img id="ficha-foto" alt="">
+      <button class="flecha antes" id="anterior" aria-label="Modelo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+      <button class="flecha despues" id="siguiente" aria-label="Modelo siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+      <div class="lados" role="group" aria-label="Ver frente o espalda">
+        <button data-lado="frente" aria-pressed="true">Frente</button>
+        <button data-lado="espalda" aria-pressed="false">Espalda</button>
+      </div>
+    </div>
+    <div class="texto">
+      <button class="cerrar" id="cerrar" aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      <span class="tema" id="ficha-tema"></span>
+      <h2 id="ficha-nombre"></h2>
+      <span class="codigo" id="ficha-codigo"></span>
+      <div class="paleta" id="ficha-paleta"></div>
+      <p class="colores-texto" id="ficha-colores"></p>
+      <ul class="incluye">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>En tu talla (4 a 14 años, XS a XL) o a medida</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Sin manga, con manga corta o larga, con o sin falda</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Podemos adaptar los colores a tu gusto</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Pedrería y cristales opcionales</li>
+      </ul>
+      <div class="acciones">
+        <a class="boton principal" id="lo-quiero">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2 0 3.5 1.1 5.4 3.2C13.9 6.1 15.4 5 17.4 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+          Lo quiero
+        </a>
+        <div class="pequenas">
+          <a class="boton secundario" id="preguntar" target="_blank" rel="noopener">Preguntar</a>
+          <button class="boton secundario" id="compartir">Compartir</button>
+        </div>
+        <p class="aviso">Al pulsar «Lo quiero» eliges talla, manga, falda y extras, y ves el precio al momento.</p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script>
+const MODELOS = [{"id": "VKS-221", "nombre": "Escarlata Naval", "seccion": "Ornamentales", "colores": "Azul marino, rojo y nude", "familias": ["Rojo", "Azul", "Nude y tierra"], "tono": "#e6e3e6"}, {"id": "VKS-220", "nombre": "Dragón Imperial", "seccion": "Animales", "colores": "Azul marino, granate, dorado y nude", "familias": ["Rojo", "Azul", "Dorado", "Nude y tierra"], "tono": "#e1e0e0"}, {"id": "VKS-219", "nombre": "Aurora Pastel", "seccion": "Degradados", "colores": "Azul cielo, rosa, violeta, blanco y nude", "familias": ["Rosa y fucsia", "Azul", "Morado", "Blanco", "Nude y tierra"], "tono": "#f5f3f6"}, {"id": "VKS-218", "nombre": "Pluma Neón", "seccion": "Plumas", "colores": "Amarillo neón, negro, verde oscuro y nude", "familias": ["Amarillo", "Verde", "Negro", "Nude y tierra", "Multicolor"], "tono": "#eeeee1"}, {"id": "VKS-217", "nombre": "Lazo Turquesa", "seccion": "Clásicos", "colores": "Turquesa, rosa, blanco y nude", "familias": ["Rosa y fucsia", "Turquesa", "Blanco", "Nude y tierra"], "tono": "#e8f3f4"}, {"id": "VKS-216", "nombre": "Circo Carmesí", "seccion": "Dibujos Animados", "colores": "Azul marino, rojo, blanco y dorado", "familias": ["Rojo", "Azul", "Blanco", "Dorado"], "tono": "#e3e1e0"}, {"id": "VKS-215", "nombre": "Sueño Imperial", "seccion": "Ornamentales", "colores": "Rojo, dorado y nude", "familias": ["Rojo", "Dorado", "Nude y tierra"], "tono": "#f7e2e0"}, {"id": "VKS-214", "nombre": "Gran Circo", "seccion": "Dibujos Animados", "colores": "Rojo, blanco, azul marino y dorado", "familias": ["Rojo", "Azul", "Blanco", "Dorado"], "tono": "#f4eeec"}, {"id": "VKS-213", "nombre": "Tormenta", "seccion": "Degradados", "colores": "Azul cielo y nude", "familias": ["Azul", "Nude y tierra"], "tono": "#eef2f4"}, {"id": "VKS-212", "nombre": "Blanca", "seccion": "Llamas", "colores": "Negro, naranja y plata", "familias": ["Naranja", "Negro", "Plata y gris"], "tono": "#e5e1e0"}, {"id": "VKS-211", "nombre": "Relámpago", "seccion": "Degradados", "colores": "Morado, negro y dorado", "familias": ["Morado", "Negro", "Dorado"], "tono": "#e1dfe0"}, {"id": "VKS-210", "nombre": "Catedral", "seccion": "Geométricos", "colores": "Rojo, granate y nude", "familias": ["Rojo", "Nude y tierra"], "tono": "#f6e2e2"}, {"id": "VKS-209", "nombre": "Buganvilla", "seccion": "Flores", "colores": "Rosa, magenta y nude", "familias": ["Rosa y fucsia", "Nude y tierra"], "tono": "#f7eef3"}, {"id": "VKS-208", "nombre": "Brasas", "seccion": "Ornamentales", "colores": "Rojo, negro y nude", "familias": ["Rojo", "Negro", "Nude y tierra"], "tono": "#f4e1e1"}, {"id": "VKS-207", "nombre": "Rayos X", "seccion": "Dibujos Animados", "colores": "Negro, blanco, rosa, amarillo, violeta y verde", "familias": ["Rosa y fucsia", "Amarillo", "Verde", "Morado", "Negro", "Blanco"], "tono": "#e4e4e3"}, {"id": "VKS-206", "nombre": "Ocelote", "seccion": "Animales", "colores": "Naranja, negro y nude", "familias": ["Naranja", "Negro", "Nude y tierra"], "tono": "#f2e7e1"}, {"id": "VKS-205", "nombre": "Niebla Verde", "seccion": "Degradados", "colores": "Verde oscuro, gris y blanco", "familias": ["Verde", "Blanco", "Plata y gris"], "tono": "#e8ebea"}, {"id": "VKS-204", "nombre": "Vainilla", "seccion": "Clásicos", "colores": "Amarillo claro, azul cielo y nude", "familias": ["Amarillo", "Azul", "Nude y tierra"], "tono": "#fcf9f0"}, {"id": "VKS-203", "nombre": "Pajarita", "seccion": "Dibujos Animados", "colores": "Azul cielo, rosa, amarillo y verde", "familias": ["Rosa y fucsia", "Amarillo", "Verde", "Azul"], "tono": "#f9f9f8"}, {"id": "VKS-202", "nombre": "Jardín Nocturno", "seccion": "Flores", "colores": "Azul marino, granate, turquesa, rojo y amarillo", "familias": ["Rojo", "Amarillo", "Turquesa", "Azul"], "tono": "#e4e5e5"}, {"id": "VKS-201", "nombre": "Circo", "seccion": "Dibujos Animados", "colores": "Rojo, azul cielo y amarillo", "familias": ["Rojo", "Amarillo", "Azul"], "tono": "#f8f4f0"}, {"id": "VKS-199", "nombre": "Solana", "seccion": "Degradados", "colores": "Púrpura, rosa y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Morado"], "tono": "#f5e7e7"}, {"id": "VKS-198", "nombre": "Águila Real", "seccion": "Plumas", "colores": "Dorado, marrón y nude", "familias": ["Dorado", "Nude y tierra"], "tono": "#eeebe9"}, {"id": "VKS-197", "nombre": "Turquesa", "seccion": "Ornamentales", "colores": "Turquesa, violeta y dorado", "familias": ["Turquesa", "Morado", "Dorado"], "tono": "#e6f0f4"}, {"id": "VKS-196", "nombre": "Abanico Real", "seccion": "Geométricos", "colores": "Negro, blanco y rojo", "familias": ["Rojo", "Negro", "Blanco"], "tono": "#e5e2e1"}, {"id": "VKS-195", "nombre": "Brisa", "seccion": "Degradados", "colores": "Rosa, amarillo y púrpura", "familias": ["Rosa y fucsia", "Amarillo", "Morado"], "tono": "#eee1e3"}, {"id": "VKS-194", "nombre": "Escarlata", "seccion": "Clásicos", "colores": "Rojo, negro y nude", "familias": ["Rojo", "Negro", "Nude y tierra"], "tono": "#f1e0e0"}, {"id": "VKS-193", "nombre": "Cordones", "seccion": "Clásicos", "colores": "Burdeos, blanco y negro", "familias": ["Rojo", "Negro", "Blanco"], "tono": "#ebe4e5"}, {"id": "VKS-192", "nombre": "Azabache", "seccion": "Plumas", "colores": "Púrpura, negro y nude", "familias": ["Morado", "Negro", "Nude y tierra"], "tono": "#e8e0e9"}, {"id": "VKS-189", "nombre": "Martina", "seccion": "Degradados", "colores": "Azul royal, cian, nude y blanco", "familias": ["Turquesa", "Azul", "Blanco", "Nude y tierra"], "tono": "#e4e7f1"}, {"id": "VKS-188", "nombre": "Lava", "seccion": "Llamas", "colores": "Rojo, nude y negro", "familias": ["Rojo", "Negro", "Nude y tierra"], "tono": "#f3e3e2"}, {"id": "VKS-187", "nombre": "Capullo", "seccion": "Flores", "colores": "Rosa, púrpura, nude y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Morado", "Nude y tierra"], "tono": "#f7eaeb"}, {"id": "VKS-186", "nombre": "Candy", "seccion": "Dibujos Animados", "colores": "Azul claro, blanco y rojo", "familias": ["Rojo", "Azul", "Blanco"], "tono": "#f3f9fc"}, {"id": "VKS-185", "nombre": "Tótem", "seccion": "Geométricos", "colores": "Púrpura, nude, blanco, rosa y lima", "familias": ["Rosa y fucsia", "Verde", "Morado", "Blanco", "Nude y tierra"], "tono": "#efe7ed"}, {"id": "VKS-184", "nombre": "Lisy", "seccion": "Llamas", "colores": "Azul marino, nude y negro", "familias": ["Azul", "Negro", "Nude y tierra"], "tono": "#e0e0e1"}, {"id": "VKS-182", "nombre": "Yameis", "seccion": "Llamas", "colores": "Melocotón, turquesa, negro y dorado", "familias": ["Naranja", "Turquesa", "Negro", "Dorado"], "tono": "#e3ebe9"}, {"id": "VKS-181", "nombre": "Lisa", "seccion": "Plumas", "colores": "Blanco, rosa fucsia y negro", "familias": ["Rosa y fucsia", "Negro", "Blanco"], "tono": "#f8f0f5"}, {"id": "VKS-180", "nombre": "Olivia", "seccion": "Llamas", "colores": "Lavanda, púrpura, plata y nude", "familias": ["Morado", "Plata y gris", "Nude y tierra"], "tono": "#f1ebf1"}, {"id": "VKS-178", "nombre": "Manzana", "seccion": "Dibujos Animados", "colores": "Azul, rojo y verde", "familias": ["Rojo", "Verde", "Azul"], "tono": "#eef2f5"}, {"id": "VKS-177", "nombre": "Cupido", "seccion": "Ornamentales", "colores": "Rosa, turquesa y magenta", "familias": ["Rosa y fucsia", "Turquesa"], "tono": "#faf1f5"}, {"id": "VKS-176", "nombre": "Galaxia", "seccion": "Estrellas", "colores": "Azul, beige y neón", "familias": ["Azul", "Nude y tierra", "Multicolor"], "tono": "#e9e7f1"}, {"id": "VKS-173", "nombre": "Cristina", "seccion": "Geométricos", "colores": "Azul, negro y violeta", "familias": ["Azul", "Morado", "Negro"], "tono": "#e4ecf4"}, {"id": "VKS-172", "nombre": "Nora", "seccion": "Plumas", "colores": "Negro, blanco y nude", "familias": ["Negro", "Blanco", "Nude y tierra"], "tono": "#e6e6e5"}, {"id": "VKS-170", "nombre": "Sofía", "seccion": "Plumas", "colores": "Azul, blanco y nude", "familias": ["Azul", "Blanco", "Nude y tierra"], "tono": "#e8e9ee"}, {"id": "VKS-167", "nombre": "Marta", "seccion": "Llamas", "colores": "Negro, fucsia, violeta y plateado", "familias": ["Rosa y fucsia", "Morado", "Negro", "Plata y gris"], "tono": "#e4e0e2"}, {"id": "VKS-166", "nombre": "Magma", "seccion": "Llamas", "colores": "Negro, rojo, dorado y nude", "familias": ["Rojo", "Negro", "Dorado", "Nude y tierra"], "tono": "#f0e8e6"}, {"id": "VKS-164", "nombre": "Natalía", "seccion": "Ornamentales", "colores": "Azul brillante, blanco purpurina y nude", "familias": ["Azul", "Blanco", "Nude y tierra"], "tono": "#ebf1f2"}, {"id": "VKS-161", "nombre": "Rana", "seccion": "Dibujos Animados", "colores": "Verde, rosa y nude", "familias": ["Rosa y fucsia", "Verde", "Nude y tierra"], "tono": "#e1f0e9"}, {"id": "VKS-160", "nombre": "Carbón", "seccion": "Llamas", "colores": "Negro, fucsia, blanco y nude", "familias": ["Rosa y fucsia", "Negro", "Blanco", "Nude y tierra"], "tono": "#e7e2e4"}, {"id": "VKS-159", "nombre": "Marino", "seccion": "Llamas", "colores": "Azul marino, fucsia y nude", "familias": ["Rosa y fucsia", "Azul", "Nude y tierra"], "tono": "#ebe7e9"}, {"id": "VKS-158", "nombre": "Helena", "seccion": "Ornamentales", "colores": "Granate, dorado, turquesa y nude", "familias": ["Rojo", "Turquesa", "Dorado", "Nude y tierra"], "tono": "#eae5e2"}, {"id": "VKS-157", "nombre": "Rocío", "seccion": "Geométricos", "colores": "Negro, amarillo y nude", "familias": ["Amarillo", "Negro", "Nude y tierra"], "tono": "#e5e4df"}, {"id": "VKS-156", "nombre": "Pilar", "seccion": "Estrellas", "colores": "Rojo, blanco, amarillo y beige", "familias": ["Rojo", "Amarillo", "Blanco", "Nude y tierra"], "tono": "#fce6e5"}, {"id": "VKS-155", "nombre": "Mati", "seccion": "Clásicos", "colores": "Magenta, púrpura y nude", "familias": ["Rosa y fucsia", "Morado", "Nude y tierra"], "tono": "#f0dfe7"}, {"id": "VKS-154", "nombre": "María", "seccion": "Geométricos", "colores": "Azul, púrpura, fucsia, amarillo y negro", "familias": ["Rosa y fucsia", "Amarillo", "Azul", "Morado", "Negro"], "tono": "#e9e3e6"}, {"id": "VKS-153", "nombre": "Lucía", "seccion": "Degradados", "colores": "Amarillo, negro y nude", "familias": ["Amarillo", "Negro", "Nude y tierra"], "tono": "#fbfbe1"}, {"id": "VKS-152", "nombre": "Flor", "seccion": "Llamas", "colores": "Blanco, rosa, amarillo y nude", "familias": ["Rosa y fucsia", "Amarillo", "Blanco", "Nude y tierra"], "tono": "#fef7f4"}, {"id": "VKS-151", "nombre": "Dana", "seccion": "Estrellas", "colores": "Verde oliva, rojo, negro, marrón y dorado", "familias": ["Rojo", "Verde", "Negro", "Dorado", "Nude y tierra"], "tono": "#e8e6e4"}, {"id": "VKS-150", "nombre": "Clara", "seccion": "Plumas", "colores": "Púrpura, gris, plata, negro y nude", "familias": ["Morado", "Negro", "Plata y gris", "Nude y tierra"], "tono": "#e9e6e7"}, {"id": "VKS-149", "nombre": "Berta", "seccion": "Llamas", "colores": "Blanco, fucsia, azul marino y nude", "familias": ["Rosa y fucsia", "Azul", "Blanco", "Nude y tierra"], "tono": "#f7f2f5"}, {"id": "VKS-148", "nombre": "Emperatriz", "seccion": "Plumas", "colores": "Fucsia, gris, negro y dorado", "familias": ["Rosa y fucsia", "Negro", "Dorado", "Plata y gris"], "tono": "#f5e2e7"}, {"id": "VKS-147", "nombre": "Clavel", "seccion": "Flores", "colores": "Blanco, rojo, verde y dorado", "familias": ["Rojo", "Verde", "Blanco", "Dorado"], "tono": "#faf4f2"}, {"id": "VKS-146", "nombre": "Resistencia", "seccion": "Dibujos Animados", "colores": "Rojo, negro y gris", "familias": ["Rojo", "Negro", "Plata y gris"], "tono": "#f4e1e1"}, {"id": "VKS-145", "nombre": "Leopardo Neón", "seccion": "Animales", "colores": "Azul, lima neón, fucsia y nude", "familias": ["Rosa y fucsia", "Verde", "Azul", "Nude y tierra", "Multicolor"], "tono": "#e8eae7"}, {"id": "VKS-144", "nombre": "Brote Ígneo", "seccion": "Plumas", "colores": "Verde lima, naranja, violeta y nude", "familias": ["Naranja", "Verde", "Morado", "Nude y tierra"], "tono": "#f1f1e4"}, {"id": "VKS-143", "nombre": "Rodeo Rosa", "seccion": "Animales", "colores": "Blanco, marrón, azul denim, rosa y dorado", "familias": ["Rosa y fucsia", "Azul", "Blanco", "Dorado", "Nude y tierra"], "tono": "#efeff0"}, {"id": "VKS-142", "nombre": "Petos", "seccion": "Dibujos Animados", "colores": "Azul denim, lima, fucsia y plata", "familias": ["Rosa y fucsia", "Verde", "Azul", "Plata y gris"], "tono": "#edeeea"}, {"id": "VKS-141", "nombre": "Ámbar", "seccion": "Geométricos", "colores": "Naranja, dorado y azul", "familias": ["Naranja", "Azul", "Dorado"], "tono": "#f8eee5"}, {"id": "VKS-140", "nombre": "Estrellas Ópticas", "seccion": "Estrellas", "colores": "Negro, blanco, amarillo neón y azul", "familias": ["Amarillo", "Azul", "Negro", "Blanco", "Multicolor"], "tono": "#ededea"}, {"id": "VKS-139", "nombre": "Aura", "seccion": "Plumas", "colores": "Violeta, blanco, fucsia, amarillo y lima", "familias": ["Rosa y fucsia", "Amarillo", "Verde", "Morado", "Blanco"], "tono": "#efe8ef"}, {"id": "VKS-138", "nombre": "Fulgor", "seccion": "Llamas", "colores": "Vinotinto, fucsia y amarillo", "familias": ["Rosa y fucsia", "Rojo", "Amarillo"], "tono": "#f4e1e5"}, {"id": "VKS-137", "nombre": "Ráfaga", "seccion": "Geométricos", "colores": "Azul marino, fucsia, violeta, lima y plata", "familias": ["Rosa y fucsia", "Verde", "Azul", "Morado", "Plata y gris"], "tono": "#e6e4e4"}, {"id": "VKS-136", "nombre": "Talismán", "seccion": "Ornamentales", "colores": "Amarillo neón, negro, fucsia y turquesa", "familias": ["Rosa y fucsia", "Amarillo", "Turquesa", "Negro", "Multicolor"], "tono": "#f3f2e1"}, {"id": "VKS-135", "nombre": "Raíces", "seccion": "Ornamentales", "colores": "Negro, amarillo neón y turquesa", "familias": ["Amarillo", "Turquesa", "Negro", "Multicolor"], "tono": "#e6ece4"}, {"id": "VKS-133", "nombre": "Arlequín", "seccion": "Dibujos Animados", "colores": "Fucsia, azul, rojo y blanco", "familias": ["Rosa y fucsia", "Rojo", "Azul", "Blanco"], "tono": "#f3eaee"}, {"id": "VKS-132", "nombre": "Centella", "seccion": "Estrellas", "colores": "Violeta, turquesa y blanco", "familias": ["Turquesa", "Morado", "Blanco"], "tono": "#ece8f1"}, {"id": "VKS-131", "nombre": "Sonrisa", "seccion": "Dibujos Animados", "colores": "Negro, blanco, rojo y verde", "familias": ["Rojo", "Verde", "Negro", "Blanco"], "tono": "#e8e6e6"}, {"id": "VKS-130", "nombre": "Voltaje", "seccion": "Geométricos", "colores": "Negro, fucsia, lima y turquesa", "familias": ["Rosa y fucsia", "Verde", "Turquesa", "Negro"], "tono": "#e5e4e1"}, {"id": "VKS-129", "nombre": "Impacto", "seccion": "Estrellas", "colores": "Negro, fucsia y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Negro"], "tono": "#e8e4e1"}, {"id": "VKS-128", "nombre": "Nácar", "seccion": "Plumas", "colores": "Blanco, rosa, lila y plata", "familias": ["Rosa y fucsia", "Morado", "Blanco", "Plata y gris"], "tono": "#fcfbfa"}, {"id": "VKS-127", "nombre": "Quimera", "seccion": "Plumas", "colores": "Negro, amarillo, verde, azul, naranja y fucsia", "familias": ["Rosa y fucsia", "Naranja", "Amarillo", "Verde", "Azul", "Negro"], "tono": "#efede3"}, {"id": "VKS-126", "nombre": "Electra", "seccion": "Llamas", "colores": "Negro, amarillo y fucsia", "familias": ["Rosa y fucsia", "Amarillo", "Negro"], "tono": "#fbf9f7"}, {"id": "VKS-125", "nombre": "Candelabro", "seccion": "Ornamentales", "colores": "Azul marino, azul y dorado", "familias": ["Azul", "Dorado"], "tono": "#e2e4e7"}, {"id": "VKS-124", "nombre": "Reino", "seccion": "Dibujos Animados", "colores": "Multicolor", "familias": ["Multicolor"], "tono": "#f3eeea"}, {"id": "VKS-123", "nombre": "Viñeta", "seccion": "Dibujos Animados", "colores": "Amarillo, fucsia, verde y naranja", "familias": ["Rosa y fucsia", "Naranja", "Amarillo", "Verde"], "tono": "#f8f3e8"}, {"id": "VKS-122", "nombre": "Enredadera", "seccion": "Ornamentales", "colores": "Turquesa, azul y violeta", "familias": ["Turquesa", "Azul", "Morado"], "tono": "#ebeaf4"}, {"id": "VKS-121", "nombre": "Tirantes", "seccion": "Clásicos", "colores": "Negro, blanco y rojo", "familias": ["Rojo", "Negro", "Blanco"], "tono": "#ebe8e8"}, {"id": "VKS-120", "nombre": "Aventura", "seccion": "Dibujos Animados", "colores": "Azul, rojo y amarillo", "familias": ["Rojo", "Amarillo", "Azul"], "tono": "#e3e3ee"}, {"id": "VKS-119", "nombre": "Arrecife", "seccion": "Flores", "colores": "Turquesa, rosa, amarillo y verde", "familias": ["Rosa y fucsia", "Amarillo", "Verde", "Turquesa"], "tono": "#e2f9fb"}, {"id": "VKS-118", "nombre": "Neópolis", "seccion": "Geométricos", "colores": "Azul petróleo, fucsia, turquesa y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Turquesa", "Azul"], "tono": "#fafafb"}, {"id": "VKS-117", "nombre": "Fénix Rojo", "seccion": "Plumas", "colores": "Blanco, rojo y dorado", "familias": ["Rojo", "Blanco", "Dorado"], "tono": "#fbf5f2"}, {"id": "VKS-116", "nombre": "Amapola", "seccion": "Flores", "colores": "Verde, blanco, negro, rojo y amarillo", "familias": ["Rojo", "Amarillo", "Verde", "Negro", "Blanco"], "tono": "#f1f1ed"}, {"id": "VKS-115", "nombre": "Vértigo", "seccion": "Geométricos", "colores": "Blanco, azul, turquesa y rosa", "familias": ["Rosa y fucsia", "Turquesa", "Azul", "Blanco"], "tono": "#f8f8f9"}, {"id": "VKS-114", "nombre": "Ciudad", "seccion": "Geométricos", "colores": "Verde lima, verde y naranja", "familias": ["Naranja", "Verde"], "tono": "#f5f5e5"}, {"id": "VKS-113", "nombre": "Aurum", "seccion": "Geométricos", "colores": "Turquesa, negro, dorado y azul", "familias": ["Turquesa", "Azul", "Negro", "Dorado"], "tono": "#eaeeeb"}, {"id": "VKS-112", "nombre": "Tuxedo", "seccion": "Clásicos", "colores": "Negro, fucsia, blanco y plata", "familias": ["Rosa y fucsia", "Negro", "Blanco", "Plata y gris"], "tono": "#f3ecef"}, {"id": "VKS-111", "nombre": "Constelación", "seccion": "Estrellas", "colores": "Fucsia, negro y plata", "familias": ["Rosa y fucsia", "Negro", "Plata y gris"], "tono": "#fdf9fa"}, {"id": "VKS-110", "nombre": "Fénix Neón", "seccion": "Plumas", "colores": "Negro, fucsia, amarillo y azul", "familias": ["Rosa y fucsia", "Amarillo", "Azul", "Negro"], "tono": "#faf9f9"}, {"id": "VKS-109", "nombre": "Vitral", "seccion": "Geométricos", "colores": "Morado, amarillo, naranja, blanco y negro", "familias": ["Naranja", "Amarillo", "Morado", "Negro", "Blanco"], "tono": "#f2ede9"}, {"id": "VKS-108", "nombre": "Camelia", "seccion": "Flores", "colores": "Negro, rojo, amarillo y turquesa", "familias": ["Rojo", "Amarillo", "Turquesa", "Negro"], "tono": "#ebe6e4"}, {"id": "VKS-107", "nombre": "Turmalina", "seccion": "Ornamentales", "colores": "Turquesa, lila y dorado", "familias": ["Turquesa", "Morado", "Dorado"], "tono": "#eaf3f0"}, {"id": "VKS-106", "nombre": "Cisne Rosa", "seccion": "Plumas", "colores": "Blanco, rosa y vinotinto", "familias": ["Rosa y fucsia", "Rojo", "Blanco"], "tono": "#f6f2f3"}, {"id": "VKS-105", "nombre": "Penumbra", "seccion": "Degradados", "colores": "Rosa, violeta y negro", "familias": ["Rosa y fucsia", "Morado", "Negro"], "tono": "#ebe8ec"}, {"id": "VKS-104", "nombre": "Índigo", "seccion": "Degradados", "colores": "Azul eléctrico, azul marino y negro", "familias": ["Azul", "Negro"], "tono": "#dddcea"}, {"id": "VKS-103", "nombre": "Abanico", "seccion": "Plumas", "colores": "Fucsia, violeta y negro", "familias": ["Rosa y fucsia", "Morado", "Negro"], "tono": "#f2e1e7"}, {"id": "VKS-102", "nombre": "Marea", "seccion": "Geométricos", "colores": "Azul petróleo, turquesa y plata", "familias": ["Turquesa", "Azul", "Plata y gris"], "tono": "#eaeeef"}, {"id": "VKS-101", "nombre": "Corazón", "seccion": "Dibujos Animados", "colores": "Turquesa, amarillo y nude", "familias": ["Amarillo", "Turquesa", "Nude y tierra"], "tono": "#ecf7f3"}, {"id": "VKS-100", "nombre": "Corbata", "seccion": "Clásicos", "colores": "Fucsia, negro y blanco", "familias": ["Rosa y fucsia", "Negro", "Blanco"], "tono": "#f0dce8"}, {"id": "VKS-099", "nombre": "Amatista", "seccion": "Ornamentales", "colores": "Negro, morado y dorado", "familias": ["Morado", "Negro", "Dorado"], "tono": "#f2f0f1"}, {"id": "VKS-098", "nombre": "Cometa", "seccion": "Estrellas", "colores": "Amarillo, fucsia y naranja", "familias": ["Rosa y fucsia", "Naranja", "Amarillo"], "tono": "#fcf8e7"}, {"id": "VKS-096", "nombre": "Corsé Vino", "seccion": "Ornamentales", "colores": "Vinotinto y azul", "familias": ["Rojo", "Azul"], "tono": "#f5f2f2"}, {"id": "VKS-095", "nombre": "Nieve", "seccion": "Llamas", "colores": "Blanco, fucsia y azul", "familias": ["Rosa y fucsia", "Azul", "Blanco"], "tono": "#f7f7f6"}, {"id": "VKS-094", "nombre": "Ala Violeta", "seccion": "Plumas", "colores": "Negro, morado y plata", "familias": ["Morado", "Negro", "Plata y gris"], "tono": "#f5f3f2"}, {"id": "VKS-093", "nombre": "Brasa", "seccion": "Llamas", "colores": "Fucsia, negro y dorado", "familias": ["Rosa y fucsia", "Negro", "Dorado"], "tono": "#faf9f9"}, {"id": "VKS-092", "nombre": "Mosaico", "seccion": "Geométricos", "colores": "Fucsia, verde y violeta", "familias": ["Rosa y fucsia", "Verde", "Morado"], "tono": "#f9f8f7"}, {"id": "VKS-091", "nombre": "Búho Lunar", "seccion": "Dibujos Animados", "colores": "Morado, nude y blanco", "familias": ["Morado", "Blanco", "Nude y tierra"], "tono": "#f6f4f4"}, {"id": "VKS-090", "nombre": "Cisne", "seccion": "Plumas", "colores": "Turquesa, negro y blanco", "familias": ["Turquesa", "Negro", "Blanco"], "tono": "#f4f3f2"}, {"id": "VKS-089", "nombre": "Lirio", "seccion": "Flores", "colores": "Verde lima y fucsia", "familias": ["Rosa y fucsia", "Verde"], "tono": "#f9f9f7"}, {"id": "VKS-088", "nombre": "Azteca", "seccion": "Geométricos", "colores": "Mostaza, turquesa y marrón", "familias": ["Amarillo", "Turquesa", "Nude y tierra"], "tono": "#f8f6f4"}, {"id": "VKS-087", "nombre": "Rubí", "seccion": "Llamas", "colores": "Vinotinto y dorado", "familias": ["Rojo", "Dorado"], "tono": "#f2efee"}, {"id": "VKS-086", "nombre": "Atardecer", "seccion": "Llamas", "colores": "Negro, rojo y fucsia", "familias": ["Rosa y fucsia", "Rojo", "Negro"], "tono": "#f5f3f2"}, {"id": "VKS-085", "nombre": "Superstar", "seccion": "Estrellas", "colores": "Fucsia multicolor", "familias": ["Rosa y fucsia", "Multicolor"], "tono": "#f8f7f7"}, {"id": "VKS-084", "nombre": "Glaciar", "seccion": "Ornamentales", "colores": "Morado y turquesa", "familias": ["Turquesa", "Morado"], "tono": "#f9f8f8"}, {"id": "VKS-083", "nombre": "Payaso", "seccion": "Dibujos Animados", "colores": "Multicolor", "familias": ["Multicolor"], "tono": "#f5f4f4"}, {"id": "VKS-082", "nombre": "Ala", "seccion": "Plumas", "colores": "Negro y azul", "familias": ["Azul", "Negro"], "tono": "#f4f3f2"}, {"id": "VKS-081", "nombre": "Estallido", "seccion": "Flores", "colores": "Negro multicolor", "familias": ["Negro", "Multicolor"], "tono": "#f8f7f6"}, {"id": "VKS-080", "nombre": "Antorcha", "seccion": "Llamas", "colores": "Naranja multicolor", "familias": ["Naranja", "Multicolor"], "tono": "#f8f7f7"}, {"id": "VKS-079", "nombre": "Garras", "seccion": "Geométricos", "colores": "Morado, azul y neón", "familias": ["Azul", "Morado", "Multicolor"], "tono": "#f6f4f4"}, {"id": "VKS-078", "nombre": "Safari", "seccion": "Dibujos Animados", "colores": "Naranja y dorado", "familias": ["Naranja", "Dorado"], "tono": "#f8f7f6"}, {"id": "VKS-077", "nombre": "Florcitas", "seccion": "Flores", "colores": "Verde, blanco y fucsia", "familias": ["Rosa y fucsia", "Verde", "Blanco"], "tono": "#f6f6f4"}, {"id": "VKS-076", "nombre": "Cerditos", "seccion": "Dibujos Animados", "colores": "Rosa y verde", "familias": ["Rosa y fucsia", "Verde"], "tono": "#fbfaf9"}, {"id": "VKS-075", "nombre": "Zafir", "seccion": "Llamas", "colores": "Azul rey y azul marino", "familias": ["Azul"], "tono": "#f6f5f5"}, {"id": "VKS-074", "nombre": "Pluma", "seccion": "Plumas", "colores": "Morado multicolor", "familias": ["Morado", "Multicolor"], "tono": "#faf9f9"}, {"id": "VKS-073", "nombre": "Rosal", "seccion": "Flores", "colores": "Negro, fucsia y dorado", "familias": ["Rosa y fucsia", "Negro", "Dorado"], "tono": "#f8f8f7"}, {"id": "VKS-072", "nombre": "Lazos", "seccion": "Dibujos Animados", "colores": "Amarillo, blanco y azul", "familias": ["Amarillo", "Azul", "Blanco"], "tono": "#f7f5f3"}, {"id": "VKS-071", "nombre": "Chaleco", "seccion": "Dibujos Animados", "colores": "Azul, morado y rojo", "familias": ["Rojo", "Azul", "Morado"], "tono": "#f9f8f8"}, {"id": "VKS-070", "nombre": "Rosado", "seccion": "Plumas", "colores": "Rosa, violeta y dorado", "familias": ["Rosa y fucsia", "Morado", "Dorado"], "tono": "#f9f8f8"}, {"id": "VKS-069", "nombre": "Oriental", "seccion": "Flores", "colores": "Turquesa, azul y dorado", "familias": ["Turquesa", "Azul", "Dorado"], "tono": "#f7f7f6"}, {"id": "VKS-068", "nombre": "Marinero", "seccion": "Dibujos Animados", "colores": "Azul rey, negro y rojo", "familias": ["Rojo", "Azul", "Negro"], "tono": "#f6f3f2"}, {"id": "VKS-067", "nombre": "Sol", "seccion": "Llamas", "colores": "Fucsia, amarillo y azul", "familias": ["Rosa y fucsia", "Amarillo", "Azul"], "tono": "#f7f5f4"}, {"id": "VKS-066", "nombre": "Selva", "seccion": "Plumas", "colores": "Verde, fucsia y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Verde"], "tono": "#f9f8f8"}, {"id": "VKS-065", "nombre": "Cintas", "seccion": "Ornamentales", "colores": "Azul, amarillo y fucsia", "familias": ["Rosa y fucsia", "Amarillo", "Azul"], "tono": "#f7f6f5"}, {"id": "VKS-064", "nombre": "Realeza", "seccion": "Ornamentales", "colores": "Terracota, vinotinto y dorado", "familias": ["Rojo", "Naranja", "Dorado"], "tono": "#f8f8f7"}, {"id": "VKS-063", "nombre": "Búho Real", "seccion": "Dibujos Animados", "colores": "Marrón y multicolor", "familias": ["Nude y tierra", "Multicolor"], "tono": "#f9f8f7"}, {"id": "VKS-062", "nombre": "Búho Neón", "seccion": "Dibujos Animados", "colores": "Fucsia, verde lima y azul", "familias": ["Rosa y fucsia", "Verde", "Azul"], "tono": "#f9f8f8"}, {"id": "VKS-061", "nombre": "Unicornio", "seccion": "Dibujos Animados", "colores": "Fucsia, turquesa y arcoíris", "familias": ["Rosa y fucsia", "Turquesa", "Multicolor"], "tono": "#f8f6f6"}, {"id": "VKS-060", "nombre": "Tigrecito", "seccion": "Dibujos Animados", "colores": "Celeste, verde y blanco", "familias": ["Verde", "Azul", "Blanco"], "tono": "#f9f8f7"}, {"id": "VKS-059", "nombre": "Trenza", "seccion": "Dibujos Animados", "colores": "Verde, morado y turquesa", "familias": ["Verde", "Turquesa", "Morado"], "tono": "#f4f3f1"}, {"id": "VKS-058", "nombre": "Lila", "seccion": "Flores", "colores": "Lila, violeta y verde", "familias": ["Verde", "Morado"], "tono": "#f9f8f8"}, {"id": "VKS-057", "nombre": "Leoncito", "seccion": "Dibujos Animados", "colores": "Terracota, naranja y negro", "familias": ["Naranja", "Negro"], "tono": "#f8f6f5"}, {"id": "VKS-056", "nombre": "Amanecer", "seccion": "Flores", "colores": "Amarillo, naranja y azul", "familias": ["Naranja", "Amarillo", "Azul"], "tono": "#f7f5f3"}, {"id": "VKS-055", "nombre": "Destello", "seccion": "Degradados", "colores": "Turquesa, fucsia y plata", "familias": ["Rosa y fucsia", "Turquesa", "Plata y gris"], "tono": "#f7f7f7"}, {"id": "VKS-054", "nombre": "Dorado", "seccion": "Ornamentales", "colores": "Azul y dorado", "familias": ["Azul", "Dorado"], "tono": "#f4f3f2"}, {"id": "VKS-053", "nombre": "Cristal", "seccion": "Degradados", "colores": "Turquesa, azul rey y plata", "familias": ["Turquesa", "Azul", "Plata y gris"], "tono": "#f7f7f7"}, {"id": "VKS-052", "nombre": "Gatitos", "seccion": "Dibujos Animados", "colores": "Verde, fucsia y negro", "familias": ["Rosa y fucsia", "Verde", "Negro"], "tono": "#f7f6f5"}, {"id": "VKS-051", "nombre": "Prisma", "seccion": "Geométricos", "colores": "Amarillo, verde y fucsia", "familias": ["Rosa y fucsia", "Amarillo", "Verde"], "tono": "#faf9f8"}, {"id": "VKS-050", "nombre": "Corsé", "seccion": "Ornamentales", "colores": "Verde petróleo y plata", "familias": ["Verde", "Turquesa", "Plata y gris"], "tono": "#f5f3f2"}, {"id": "VKS-049", "nombre": "Solar", "seccion": "Ornamentales", "colores": "Amarillo, turquesa y violeta", "familias": ["Amarillo", "Turquesa", "Morado"], "tono": "#f7f6f4"}, {"id": "VKS-048", "nombre": "Ornamento", "seccion": "Ornamentales", "colores": "Morado, turquesa y lila", "familias": ["Turquesa", "Morado"], "tono": "#f9f8f8"}, {"id": "VKS-047", "nombre": "Fucsia", "seccion": "Llamas", "colores": "Fucsia, verde lima y plata", "familias": ["Rosa y fucsia", "Verde", "Plata y gris"], "tono": "#f7f5f4"}, {"id": "VKS-046", "nombre": "Barroco", "seccion": "Ornamentales", "colores": "Morado, naranja y turquesa", "familias": ["Naranja", "Turquesa", "Morado"], "tono": "#f6f5f4"}, {"id": "VKS-045", "nombre": "Mandala", "seccion": "Ornamentales", "colores": "Azul, verde y violeta", "familias": ["Verde", "Azul", "Morado"], "tono": "#f6f6f5"}, {"id": "VKS-044", "nombre": "Hielo", "seccion": "Degradados", "colores": "Azul, turquesa y plata", "familias": ["Turquesa", "Azul", "Plata y gris"], "tono": "#f6f5f4"}, {"id": "VKS-043", "nombre": "Tribal", "seccion": "Geométricos", "colores": "Fucsia, turquesa y amarillo", "familias": ["Rosa y fucsia", "Amarillo", "Turquesa"], "tono": "#f5f3f2"}, {"id": "VKS-042", "nombre": "Ígneo", "seccion": "Llamas", "colores": "Naranja, verde lima y azul", "familias": ["Naranja", "Verde", "Azul"], "tono": "#f7f5f3"}, {"id": "VKS-041", "nombre": "Lima", "seccion": "Geométricos", "colores": "Verde lima, fucsia y celeste", "familias": ["Rosa y fucsia", "Verde", "Azul"], "tono": "#f6f6f4"}, {"id": "VKS-040", "nombre": "Fénix", "seccion": "Llamas", "colores": "Vinotinto, fucsia y naranja", "familias": ["Rosa y fucsia", "Rojo", "Naranja"], "tono": "#f4f2f2"}, {"id": "VKS-039", "nombre": "Tropical", "seccion": "Flores", "colores": "Verde, naranja y azul", "familias": ["Naranja", "Verde", "Azul"], "tono": "#f4f3f1"}, {"id": "VKS-038", "nombre": "Aurora", "seccion": "Degradados", "colores": "Azul, verde y turquesa", "familias": ["Verde", "Turquesa", "Azul"], "tono": "#f7f6f6"}, {"id": "VKS-037", "nombre": "Geo", "seccion": "Geométricos", "colores": "Turquesa, lima y fucsia", "familias": ["Rosa y fucsia", "Verde", "Turquesa"], "tono": "#f4f3f2"}, {"id": "VKS-036", "nombre": "Floral", "seccion": "Flores", "colores": "Negro, fucsia y dorado", "familias": ["Rosa y fucsia", "Negro", "Dorado"], "tono": "#f6f5f5"}, {"id": "VKS-035", "nombre": "Fuego", "seccion": "Llamas", "colores": "Morado, naranja y plata", "familias": ["Naranja", "Morado", "Plata y gris"], "tono": "#f7f6f6"}, {"id": "VKS-034", "nombre": "Mariposa", "seccion": "Animales", "colores": "Azul, fucsia y dorado", "familias": ["Rosa y fucsia", "Azul", "Dorado"], "tono": "#f5f3f2"}, {"id": "VKS-033", "nombre": "Zafiro", "seccion": "Clásicos", "colores": "Azul eléctrico y nude", "familias": ["Azul", "Nude y tierra"], "tono": "#f6f6f6"}, {"id": "VKS-032", "nombre": "Imperial", "seccion": "Ornamentales", "colores": "Vinotinto y dorado", "familias": ["Rojo", "Dorado"], "tono": "#f6f3f2"}, {"id": "VKS-031", "nombre": "Flama", "seccion": "Geométricos", "colores": "Rojo, blanco y negro", "familias": ["Rojo", "Negro", "Blanco"], "tono": "#f8f6f6"}, {"id": "VKS-030", "nombre": "Esmeralda", "seccion": "Degradados", "colores": "Verde esmeralda y turquesa", "familias": ["Verde", "Turquesa"], "tono": "#f7f6f5"}, {"id": "VKS-029", "nombre": "Ratoncitos", "seccion": "Dibujos Animados", "colores": "Blanco, rojo y multicolor", "familias": ["Rojo", "Blanco", "Multicolor"], "tono": "#faf8f6"}, {"id": "VKS-028", "nombre": "Gato y Ratón", "seccion": "Dibujos Animados", "colores": "Pastel multicolor", "familias": ["Multicolor"], "tono": "#f7f8f7"}, {"id": "VKS-027", "nombre": "Pantera", "seccion": "Dibujos Animados", "colores": "Arcoíris y rosa", "familias": ["Rosa y fucsia", "Multicolor"], "tono": "#f3eaed"}, {"id": "VKS-026", "nombre": "Leopardo", "seccion": "Animales", "colores": "Rosa, violeta y fucsia", "familias": ["Rosa y fucsia", "Morado"], "tono": "#f8edf2"}, {"id": "VKS-025", "nombre": "Calaveras", "seccion": "Ornamentales", "colores": "Morado, fucsia y turquesa", "familias": ["Rosa y fucsia", "Turquesa", "Morado"], "tono": "#ebe0ec"}, {"id": "VKS-024", "nombre": "Magia", "seccion": "Dibujos Animados", "colores": "Morado, plata y fucsia", "familias": ["Rosa y fucsia", "Morado", "Plata y gris"], "tono": "#eae7e9"}, {"id": "VKS-023", "nombre": "Rayo", "seccion": "Geométricos", "colores": "Azul eléctrico, turquesa y violeta", "familias": ["Turquesa", "Azul", "Morado"], "tono": "#e0e5f0"}, {"id": "VKS-022", "nombre": "Parches", "seccion": "Dibujos Animados", "colores": "Verde, naranja y rojo", "familias": ["Rojo", "Naranja", "Verde"], "tono": "#e5ebe7"}, {"id": "VKS-021", "nombre": "Olas", "seccion": "Geométricos", "colores": "Azul petróleo y blanco", "familias": ["Turquesa", "Azul", "Blanco"], "tono": "#eaeeef"}, {"id": "VKS-020", "nombre": "Corazones", "seccion": "Geométricos", "colores": "Turquesa y amarillo", "familias": ["Amarillo", "Turquesa"], "tono": "#ecf7f3"}, {"id": "VKS-019", "nombre": "Alicia", "seccion": "Dibujos Animados", "colores": "Turquesa, azul y rojo", "familias": ["Rojo", "Turquesa", "Azul"], "tono": "#ebf3f4"}, {"id": "VKS-018", "nombre": "Graffiti", "seccion": "Geométricos", "colores": "Azul petróleo, fucsia y turquesa", "familias": ["Rosa y fucsia", "Turquesa", "Azul"], "tono": "#ebeaee"}, {"id": "VKS-017", "nombre": "Burbujas", "seccion": "Geométricos", "colores": "Violeta multicolor", "familias": ["Morado", "Multicolor"], "tono": "#eee6f0"}, {"id": "VKS-016", "nombre": "Rock & Roll", "seccion": "Dibujos Animados", "colores": "Fucsia, negro y plata", "familias": ["Rosa y fucsia", "Negro", "Plata y gris"], "tono": "#f4e3e9"}, {"id": "VKS-015", "nombre": "Gatito", "seccion": "Dibujos Animados", "colores": "Naranja, negro y blanco", "familias": ["Naranja", "Negro", "Blanco"], "tono": "#f7f3ea"}, {"id": "VKS-014", "nombre": "Estrellas Pop", "seccion": "Estrellas", "colores": "Amarillo, fucsia y naranja", "familias": ["Rosa y fucsia", "Naranja", "Amarillo"], "tono": "#fcf8e7"}, {"id": "VKS-013", "nombre": "Tallado", "seccion": "Ornamentales", "colores": "Verde oliva, dorado y naranja", "familias": ["Naranja", "Verde", "Dorado"], "tono": "#f1ede7"}, {"id": "VKS-010", "nombre": "Margarita", "seccion": "Dibujos Animados", "colores": "Azul, violeta y rojo", "familias": ["Rojo", "Azul", "Morado"], "tono": "#e4e6f5"}, {"id": "VKS-009", "nombre": "Plumaje", "seccion": "Plumas", "colores": "Violeta, turquesa y negro", "familias": ["Turquesa", "Morado", "Negro"], "tono": "#ece9ef"}, {"id": "VKS-008", "nombre": "Estelar", "seccion": "Estrellas", "colores": "Azul, violeta y plata", "familias": ["Azul", "Morado", "Plata y gris"], "tono": "#e8e9f0"}, {"id": "VKS-007", "nombre": "Alas", "seccion": "Plumas", "colores": "Violeta, negro y dorado", "familias": ["Morado", "Negro", "Dorado"], "tono": "#e8e3e5"}, {"id": "VKS-006", "nombre": "Lunares", "seccion": "Lunares", "colores": "Amarillo y negro", "familias": ["Amarillo", "Negro"], "tono": "#f1efe8"}];
+const CONFIG = {"formulario": "https://vikasports-maillots.streamlit.app/", "whatsapp": "34662448237", "familias": [{"nombre": "Rosa y fucsia", "hex": "#E0218A"}, {"nombre": "Rojo", "hex": "#C8102E"}, {"nombre": "Naranja", "hex": "#F28C28"}, {"nombre": "Amarillo", "hex": "#F7D417"}, {"nombre": "Verde", "hex": "#2EAF5B"}, {"nombre": "Turquesa", "hex": "#00B5BE"}, {"nombre": "Azul", "hex": "#1F4FBF"}, {"nombre": "Morado", "hex": "#7B3FB5"}, {"nombre": "Negro", "hex": "#151515"}, {"nombre": "Blanco", "hex": "#FFFFFF"}, {"nombre": "Dorado", "hex": "#C9A227"}, {"nombre": "Plata y gris", "hex": "#B8BCC2"}, {"nombre": "Nude y tierra", "hex": "#D9B99B"}, {"nombre": "Multicolor", "hex": "multi"}]};
+
+const $ = (id) => document.getElementById(id);
+const HEX = Object.fromEntries(CONFIG.familias.map((f) => [f.nombre, f.hex]));
+const estado = { tema: "Todos", colores: new Set(), texto: "", soloFavoritos: false };
+let visibles = [];
+let actual = -1;
+let lado = "frente";
+
+/* Favoritos guardados en este navegador */
+let favoritos = new Set();
+try { favoritos = new Set(JSON.parse(localStorage.getItem("vks-favoritos") || "[]")); } catch {}
+function guardarFavoritos() {
+  try { localStorage.setItem("vks-favoritos", JSON.stringify([...favoritos])); } catch {}
+  $("cuenta-favoritos").textContent = favoritos.size;
+}
+
+const foto = (m, l) => `${m.id}-${l}.webp`;
+const sinTildes = (t) => t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+const enlaceWhatsApp = (texto) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(texto)}`;
+const enlaceFormulario = (m) => `${CONFIG.formulario}?modelo=${encodeURIComponent(m.id)}`;
+
+function pintarPunto(hex) {
+  const s = document.createElement("span");
+  if (hex === "multi") s.className = "multi"; else s.style.background = hex;
+  return s;
+}
+
+/* ---------- filtros ---------- */
+function crearFiltros() {
+  const temas = ["Todos", ...new Set(MODELOS.map((m) => m.seccion))];
+  const cuenta = (t) => t === "Todos" ? MODELOS.length : MODELOS.filter((m) => m.seccion === t).length;
+  temas.sort((a, b) => a === "Todos" ? -1 : b === "Todos" ? 1 : cuenta(b) - cuenta(a));
+  for (const t of temas) {
+    const b = document.createElement("button");
+    b.className = "chip"; b.dataset.tema = t;
+    b.append(t, Object.assign(document.createElement("small"), { textContent: cuenta(t) }));
+    b.addEventListener("click", () => { estado.tema = t; pintar(); });
+    $("temas").append(b);
+  }
+  for (const f of CONFIG.familias) {
+    if (!MODELOS.some((m) => m.familias.includes(f.nombre))) continue;
+    const b = document.createElement("button");
+    b.className = "muestra" + (f.hex === "multi" ? " multi" : "");
+    if (f.hex !== "multi") b.style.background = f.hex;
+    b.title = f.nombre; b.setAttribute("aria-label", f.nombre);
+    b.addEventListener("click", () => {
+      estado.colores.has(f.nombre) ? estado.colores.delete(f.nombre) : estado.colores.add(f.nombre);
+      pintar();
+    });
+    b.dataset.color = f.nombre;
+    $("colores").append(b);
+  }
+}
+
+function filtrar() {
+  const q = sinTildes(estado.texto.trim());
+  return MODELOS.filter((m) =>
+    (estado.tema === "Todos" || m.seccion === estado.tema) &&
+    [...estado.colores].every((c) => m.familias.includes(c)) &&
+    (!estado.soloFavoritos || favoritos.has(m.id)) &&
+    (!q || sinTildes(`${m.nombre} ${m.id} ${m.colores} ${m.seccion}`).includes(q)));
+}
+
+/* ---------- tarjetas ---------- */
+const ICONO_CORAZON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9.2C1.2 8.6 3.2 5 6.6 5c2 0 3.5 1.1 5.4 3.2C13.9 6.1 15.4 5 17.4 5c3.4 0 5.4 3.6 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>';
+
+function tarjeta(m, i) {
+  const art = document.createElement("article");
+  art.className = "tarjeta";
+  art.style.setProperty("--tono", m.tono);
+  art.style.animationDelay = `${Math.min(i, 12) * 25}ms`;
+
+  const abrir = document.createElement("button");
+  abrir.className = "abrir";
+  abrir.setAttribute("aria-label", `Ver ${m.nombre}, ${m.id}`);
+  const marco = document.createElement("div");
+  marco.className = "foto";
+  const delante = Object.assign(document.createElement("img"),
+    { className: "delante", alt: `Maillot ${m.nombre}`, loading: i < 8 ? "eager" : "lazy", decoding: "async" });
+  const lista = () => marco.classList.add("lista");
+  delante.addEventListener("load", lista);
+  delante.addEventListener("error", lista);
+  delante.src = foto(m, "frente");
+  const dorso = Object.assign(document.createElement("img"), { className: "dorso", alt: "", decoding: "async" });
+  // La espalda solo se carga al pasar el ratón por encima.
+  art.addEventListener("pointerenter", () => { if (!dorso.src) dorso.src = foto(m, "espalda"); }, { once: true });
+  marco.append(delante, dorso);
+  const info = document.createElement("div");
+  info.className = "info";
+  info.append(
+    Object.assign(document.createElement("h3"), { textContent: m.nombre }),
+    Object.assign(document.createElement("p"), { className: "ref", textContent: `${m.id} · ${m.seccion}` }));
+  const puntos = document.createElement("div");
+  puntos.className = "puntos";
+  m.familias.slice(0, 6).forEach((f) => puntos.append(pintarPunto(HEX[f])));
+  info.append(puntos);
+  abrir.append(marco, info);
+  abrir.addEventListener("click", () => abrirFicha(visibles.indexOf(m)));
+
+  const corazon = document.createElement("button");
+  corazon.className = "corazon";
+  corazon.innerHTML = ICONO_CORAZON;
+  const marcar = () => {
+    corazon.setAttribute("aria-pressed", favoritos.has(m.id));
+    corazon.setAttribute("aria-label", favoritos.has(m.id) ? `Quitar ${m.nombre} de favoritos` : `Guardar ${m.nombre} en favoritos`);
+  };
+  marcar();
+  corazon.addEventListener("click", () => {
+    favoritos.has(m.id) ? favoritos.delete(m.id) : favoritos.add(m.id);
+    guardarFavoritos(); marcar();
+    if (estado.soloFavoritos) pintar();
+  });
+  art.append(abrir, corazon);
+  return art;
+}
+
+function pintar() {
+  visibles = filtrar();
+  const rejilla = $("rejilla");
+  rejilla.replaceChildren();
+  if (!visibles.length) {
+    const v = document.createElement("div");
+    v.className = "vacio";
+    v.innerHTML = estado.soloFavoritos && !favoritos.size
+      ? "<strong>Aún no tienes favoritos</strong>Toca el corazón de los maillots que te gusten para guardarlos aquí."
+      : "<strong>No hay maillots con estos filtros</strong>Prueba con otro tema o quita algún color.";
+    rejilla.append(v);
+  } else {
+    const trozo = document.createDocumentFragment();
+    visibles.forEach((m, i) => trozo.append(tarjeta(m, i)));
+    rejilla.append(trozo);
+  }
+  document.querySelectorAll("#temas .chip").forEach((b) => b.setAttribute("aria-pressed", b.dataset.tema === estado.tema));
+  document.querySelectorAll("#colores .muestra").forEach((b) => b.setAttribute("aria-pressed", estado.colores.has(b.dataset.color)));
+  $("ver-favoritos").setAttribute("aria-pressed", estado.soloFavoritos);
+  $("ver-favoritos").classList.toggle("activo", estado.soloFavoritos);
+  const n = visibles.length;
+  $("contador").textContent = `${n} ${n === 1 ? "diseño" : "diseños"}${estado.soloFavoritos ? " en favoritos" : ""}`;
+  $("limpiar").hidden = estado.tema === "Todos" && !estado.colores.size && !estado.texto && !estado.soloFavoritos;
+}
+
+/* ---------- ficha ---------- */
+function mostrarLado(l) {
+  lado = l;
+  const m = visibles[actual];
+  $("ficha-foto").src = foto(m, l);
+  $("ficha-foto").alt = `Maillot ${m.nombre}, ${l}`;
+  document.querySelectorAll(".lados button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lado === l));
+}
+
+function abrirFicha(i) {
+  if (i < 0 || i >= visibles.length) return;
+  actual = i;
+  const m = visibles[i];
+  $("escenario").style.setProperty("--tono", m.tono);
+  $("ficha-tema").textContent = m.seccion;
+  $("ficha-nombre").textContent = m.nombre;
+  $("ficha-codigo").textContent = `Referencia ${m.id}`;
+  const paleta = $("ficha-paleta");
+  paleta.replaceChildren();
+  for (const f of m.familias) {
+    const s = document.createElement("span");
+    const punto = document.createElement("i");
+    if (HEX[f] === "multi") punto.className = "multi"; else punto.style.background = HEX[f];
+    s.append(punto, f);
+    paleta.append(s);
+  }
+  $("ficha-colores").textContent = `Colores del diseño: ${m.colores.charAt(0).toLowerCase()}${m.colores.slice(1)}.`;
+  $("lo-quiero").href = enlaceFormulario(m);
+  $("preguntar").href = enlaceWhatsApp(`Hola, me interesa el maillot ${m.nombre} (${m.id}) del catálogo. ${location.href.split("#")[0]}#${m.id}`);
+  mostrarLado("frente");
+  // Cargar de antemano la espalda y los modelos de al lado.
+  [foto(m, "espalda"), visibles[i + 1] && foto(visibles[i + 1], "frente"), visibles[i - 1] && foto(visibles[i - 1], "frente")]
+    .filter(Boolean).forEach((src) => { new Image().src = src; });
+  $("anterior").hidden = i === 0;
+  $("siguiente").hidden = i === visibles.length - 1;
+  history.replaceState(null, "", `#${m.id}`);
+  if (!$("ficha").open) $("ficha").showModal();
+}
+
+function cerrarFicha() {
+  $("ficha").close();
+}
+
+$("ficha").addEventListener("close", () => history.replaceState(null, "", location.pathname + location.search));
+$("ficha").addEventListener("click", (e) => { if (e.target === $("ficha")) cerrarFicha(); });
+$("cerrar").addEventListener("click", cerrarFicha);
+$("anterior").addEventListener("click", () => abrirFicha(actual - 1));
+$("siguiente").addEventListener("click", () => abrirFicha(actual + 1));
+document.querySelectorAll(".lados button").forEach((b) => b.addEventListener("click", () => mostrarLado(b.dataset.lado)));
+$("ficha-foto").addEventListener("click", () => mostrarLado(lado === "frente" ? "espalda" : "frente"));
+document.addEventListener("keydown", (e) => {
+  if (!$("ficha").open) return;
+  if (e.key === "ArrowRight") abrirFicha(actual + 1);
+  if (e.key === "ArrowLeft") abrirFicha(actual - 1);
+});
+
+/* Deslizar el dedo en el móvil para pasar de modelo */
+let toqueX = null;
+$("escenario").addEventListener("touchstart", (e) => { toqueX = e.touches[0].clientX; }, { passive: true });
+$("escenario").addEventListener("touchend", (e) => {
+  if (toqueX === null) return;
+  const dx = e.changedTouches[0].clientX - toqueX;
+  if (Math.abs(dx) > 50) abrirFicha(actual + (dx < 0 ? 1 : -1));
+  toqueX = null;
+});
+
+$("compartir").addEventListener("click", async () => {
+  const m = visibles[actual];
+  const url = `${location.href.split("#")[0]}#${m.id}`;
+  try {
+    if (navigator.share) await navigator.share({ title: `${m.nombre} · Vika Sports`, url });
+    else { await navigator.clipboard.writeText(url); $("compartir").textContent = "¡Enlace copiado!"; setTimeout(() => { $("compartir").textContent = "Compartir"; }, 2000); }
+  } catch {}
+});
+
+/* ---------- arranque ---------- */
+crearFiltros();
+let espera;
+$("buscar").addEventListener("input", (e) => { clearTimeout(espera); espera = setTimeout(() => { estado.texto = e.target.value; pintar(); }, 150); });
+$("limpiar").addEventListener("click", () => {
+  Object.assign(estado, { tema: "Todos", texto: "", soloFavoritos: false }); estado.colores.clear();
+  $("buscar").value = ""; pintar();
+});
+$("ver-favoritos").addEventListener("click", () => {
+  estado.soloFavoritos = !estado.soloFavoritos; pintar();
+  $("busqueda").scrollIntoView({ behavior: "smooth" });
+});
+const hola = "Hola, estoy viendo el catálogo de maillots de Vika Sports.";
+$("whatsapp-barra").href = enlaceWhatsApp(hola);
+$("whatsapp-pie").href = enlaceWhatsApp(hola);
+$("formulario-pie").href = CONFIG.formulario;
+new IntersectionObserver(([e]) => $("filtros").classList.toggle("pegado", e.intersectionRatio < 1),
+  { rootMargin: "-65px 0px 0px 0px", threshold: [1] }).observe($("filtros"));
+// Quitar el degradado de la fila cuando ya se ha deslizado hasta el final.
+document.querySelectorAll(".fila").forEach((fila) => {
+  const mirar = () => fila.classList.toggle("al-final", fila.scrollLeft + fila.clientWidth >= fila.scrollWidth - 4);
+  fila.addEventListener("scroll", mirar, { passive: true });
+  addEventListener("resize", mirar);
+  mirar();
+});
+guardarFavoritos();
+pintar();
+
+/* Abrir directamente un modelo compartido: ...#VKS-221 */
+const compartido = decodeURIComponent(location.hash.slice(1));
+if (compartido) {
+  const i = visibles.findIndex((m) => m.id === compartido);
+  if (i >= 0) abrirFicha(i);
+}
+</script>
+</body>
+</html>
